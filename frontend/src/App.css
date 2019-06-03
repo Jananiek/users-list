@@ -4,6 +4,25 @@
 .search{
   padding: 40px 0;
 }
+.pagination{
+  padding: 30px ;
+}
+.page-numbers li button{
+  border:1px solid #dee2e6;
+  padding:5px 10px;
+  background: #f1f1f1;
+}
+.page-numbers li button.current{
+  background: #0000ff3d;
+}
+.page-numbers li button:hover{
+  background: #0000ff3d;
+}
+.page-numbers{
+ list-style: none;
+ display: flex;
+ margin: auto;
+}
 
 @keyframes App-logo-spin {
   from {

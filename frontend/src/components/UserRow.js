@@ -7,10 +7,10 @@ constructor(props){
 }
 
   render() {
-    const users=this.props.users;
-        const tableRow = users.map(user => {
+    const currentUsers=this.props.currentUsers;
+    const tableRow = currentUsers.map((user,index) => {
             return (
-              <tr key={user.id}>
+              <tr key={index}>
                 <td>{user.id}</td>
                 <td>{user.fname}</td>
                 <td>{user.lname}</td>
