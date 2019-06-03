@@ -8,7 +8,9 @@ class ListViewTable extends Component {
       isLoaded: false,
       isAssending:true,
       error: null,
-      users: []
+      users: [],
+      currentPage: 3,
+      perPage: 25
     };
   }
   componentDidMount() {
