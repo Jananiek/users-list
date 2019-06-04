@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import UserProfile from './UserProfile';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 class SingleView extends Component{
   constructor(props){
@@ -37,7 +39,7 @@ class SingleView extends Component{
       if(error){
         return <div>Error: {error.message}</div>
       }else if(!isLoaded){
-        return <div>Loading...</div>;
+        return <div className="loading col-12"><h3>Loading...<FontAwesomeIcon icon={faSpinner}  spin  /></h3></div>;
       }else{
         return(
           <div>

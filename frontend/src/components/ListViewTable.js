@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
 import UserRow from "./UserRow";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+
 class ListViewTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoaded: false,
+      isCountLoaded:false,
       isAssending:true,
       error: null,
       users: [],
@@ -19,14 +23,33 @@ class ListViewTable extends Component {
       .then(response => {
         this.setState({
           isLoaded: true,
-          users: response.data
+          isCountLoaded:false,
+          users: response.data,
+        });
+        //console.log(this.state.users);
+        return axios.get('http://localhost:8000/api/videos/count')
+      })
+      .then(response=>{
+        const usersData=response.data.map(d=>{
+          return{
+            id:d.user_id,
+            vCount:d.total
+          }
+        });
+        const updatedUsers=[];
+        usersData.map((userData,index)=>{
+          updatedUsers.push(Object.assign({},userData,this.state.users[index]));
+        })
+       this.setState({
+         users:updatedUsers,
+         isCountLoaded:true
         });
       })
       .catch(function(error) {
         console.log(error);
         this.setState({
           isLoaded: true,
-          error
+          error:error
         });
       });
   }
@@ -68,14 +91,15 @@ pagination() {
   );
 }
   render() {
-    const { error, isLoaded, users, currentPage, perPage } = this.state;
+    const { error, isLoaded, isCountLoaded, users, currentPage, perPage } = this.state;
     const indexOfLastUser = currentPage * perPage;
     const indexOfFirstUser = indexOfLastUser - perPage;
     const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+    console.log(users);
       if(error){
         return <div>Error: {error.message}</div>
     }else if(!isLoaded){
-        return <div>Loading...</div>;
+        return <div className="loading col-12"><h3>Loading...<FontAwesomeIcon icon={faSpinner}  spin  /></h3></div>;
     }else{
      return(
       <div className="table-responsive">
@@ -90,7 +114,7 @@ pagination() {
           </tr>
         </thead>
         <tbody>
-        <UserRow users={users} currentUsers={currentUsers} />
+        <UserRow users={users} isCountLoaded={isCountLoaded} currentUsers={currentUsers} />
         </tbody>
       </table>
       <div className="pagination">
