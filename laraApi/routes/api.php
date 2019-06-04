@@ -17,9 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::group(['middleware'=>'cors'],function(){
-    Route::get('users','UserController@index');
-    Route::get('user/{id}','UserController@show');
-    Route::get('videos','VideoController@index');
-    Route::get('videos/count','VideoController@getVideoCount');
+    Route::get('users','UserController@index')->name('user.index');
+    Route::get('user/{id}','UserController@show')->name('user.show');
+    Route::get('videos','VideoController@index')->name('video.index');
+    Route::get('videos/count','VideoController@getVideoCount')->name('video.count');
 
 });
