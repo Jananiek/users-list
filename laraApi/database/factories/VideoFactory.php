@@ -1,7 +1,6 @@
 <?php
 
 use Faker\Generator as Faker;
-
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -13,9 +12,10 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(App\Video::class, function (Faker $faker) {
+    $user = factory(App\User::class)->create();
     return [
-        'fname'=>$faker->firstName,
-        'lname'=>$faker->lastName
+            'user_id' => $user->id,
+            'title' => $faker->sentence($nbWords = 5, $variableNbWords = true)
     ];
 });
