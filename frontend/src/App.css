@@ -4,6 +4,9 @@
 .search{
   padding: 40px 0;
 }
+.m-r-5{
+  margin-right: 5px
+}
 .loading{
   text-align: center;
   top:100px;

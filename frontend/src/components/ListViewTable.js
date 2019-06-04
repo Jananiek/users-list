@@ -3,6 +3,7 @@ import axios from "axios";
 import UserRow from "./UserRow";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faSort } from '@fortawesome/free-solid-svg-icons';
 
 class ListViewTable extends Component {
   constructor(props) {
@@ -90,12 +91,30 @@ pagination() {
     </ul>
   );
 }
+onSort(event, sortKey) {
+  const data = this.state.users;
+  if(this.state.isAssending){
+    console.log(this.state.isAssending);
+    data.sort((a, b) => a[sortKey].localeCompare(b[sortKey]));
+    this.setState({
+      users: data,
+      isAssending:false
+    });
+  }else{
+    console.log(this.state.isAssending);
+    data.sort((a, b) => a[sortKey].localeCompare(b[sortKey])).reverse();
+  this.setState({
+    users: data,
+    isAssending:true
+  });
+  } 
+}
+
   render() {
     const { error, isLoaded, isCountLoaded, users, currentPage, perPage } = this.state;
     const indexOfLastUser = currentPage * perPage;
     const indexOfFirstUser = indexOfLastUser - perPage;
     const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
-    console.log(users);
       if(error){
         return <div>Error: {error.message}</div>
     }else if(!isLoaded){
@@ -107,8 +126,8 @@ pagination() {
         <thead>
           <tr>
             <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name </th>
+            <th><FontAwesomeIcon icon={faSort}  className="m-r-5" onClick={(e)=>this.onSort(e,'fname')}/><span></span>First Name</th>
+            <th><FontAwesomeIcon icon={faSort}  className="m-r-5" onClick={(e)=>this.onSort(e,'lname')}/><span></span>Last Name </th>
             <th>Video Count</th>
             <th>Actions</th>
           </tr>
