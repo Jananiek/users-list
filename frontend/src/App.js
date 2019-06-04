@@ -8,7 +8,9 @@ import "./App.css";
 function listView() {
   return (
     <div className="container">
-      <h3>List Of Users</h3>
+      <div className="page-title">
+        <h3>User Profile details</h3>
+      </div>
       <div className="row">
         <ListViewTable />
       </div>

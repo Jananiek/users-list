@@ -4,6 +4,16 @@
 .search{
   padding: 40px 0;
 }
+.loading{
+  text-align: center;
+  top:100px;
+}
+.loading h3{
+  color:#a8acaf;
+}
+.page-title{
+  padding: 20px 0;
+}
 .pagination{
   padding: 30px ;
 }
