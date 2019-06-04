@@ -15,8 +15,7 @@ class UserTableSeeder extends Seeder
         for($i=0;$i<200;$i++){
             User::create([
                 'fname'=>$faker->firstName,
-                'lname'=>$faker->lastName,
-                'v_count'=>$faker->numberBetween($min = 0, $max = 10)
+                'lname'=>$faker->lastName
             ]);
         }
     }
